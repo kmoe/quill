@@ -6469,6 +6469,14 @@ Format = (function() {
       tag: 'S',
       prepare: 'strikeThrough'
     },
+    superscript: {
+      tag: 'SUP',
+      prepare: 'superscript'
+    },
+    subscript: {
+      tag: 'SUB',
+      prepare: 'subscript'
+    },
     color: {
       style: 'color',
       "default": 'rgb(0, 0, 0)',
@@ -9486,7 +9494,9 @@ Toolbar = (function() {
       'link': 'link',
       'list': 'list',
       'strike': 'strike',
-      'underline': 'underline'
+      'underline': 'underline',
+      'superscript': 'superscript',
+      'subscript': 'subscript'
     },
     TOOLTIP: {
       'image': 'image',
@@ -10056,7 +10066,7 @@ Quill = (function(superClass) {
   Quill.themes = [];
 
   Quill.DEFAULTS = {
-    formats: ['align', 'bold', 'italic', 'strike', 'underline', 'color', 'background', 'font', 'size', 'link', 'image', 'bullet', 'list'],
+    formats: ['align', 'bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'color', 'background', 'font', 'size', 'link', 'image', 'bullet', 'list'],
     modules: {
       'keyboard': true,
       'paste-manager': true,
