@@ -8936,7 +8936,9 @@ Keyboard = (function() {
     _.each(['bold', 'italic', 'underline'], (function(_this) {
       return function(format) {
         return _this.addHotkey(Keyboard.hotkeys[format.toUpperCase()], function(range) {
-          _this.toggleFormat(range, format);
+          if (_this.quill.options.formats.indexOf(format) > -1) {
+            _this.toggleFormat(range, format);
+          }
           return false;
         });
       };
@@ -9873,12 +9875,20 @@ UndoManager = (function() {
   UndoManager.prototype.initListeners = function() {
     this.quill.onModuleLoad('keyboard', (function(_this) {
       return function(keyboard) {
+        var redoKey;
         keyboard.addHotkey(UndoManager.hotkeys.UNDO, function() {
           _this.quill.editor.checkUpdate();
           _this.undo();
           return false;
         });
-        return keyboard.addHotkey(UndoManager.hotkeys.REDO, function() {
+        redoKey = [UndoManager.hotkeys.REDO];
+        if (navigator.platform.indexOf('Win') > -1) {
+          redoKey.push({
+            key: 'Y',
+            metaKey: true
+          });
+        }
+        return keyboard.addHotkey(redoKey, function() {
           _this.quill.editor.checkUpdate();
           _this.redo();
           return false;
